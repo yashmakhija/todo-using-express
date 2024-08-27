@@ -22,7 +22,7 @@ app.post("/", (req, res) => {
   res.status(202).json(todo);
 });
 
-app.put("/todos/:id", (req, res) => {
+app.put("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const todo = todos.find((todo) => todo.id === id);
 
@@ -37,7 +37,7 @@ app.put("/todos/:id", (req, res) => {
   res.json(todo);
 });
 
-app.delete("/todos/:id", (req, res) => {
+app.delete("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = todos.findIndex((todo) => todo.id === id);
 
