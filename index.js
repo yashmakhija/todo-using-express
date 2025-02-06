@@ -1,12 +1,12 @@
 const express = require("express");
-const cors = require('cors')
+const cors = require("cors");
 const app = express();
 const path = require("path");
 
-require('dotenv').config()
+require("dotenv").config();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 let todos = [];
@@ -24,6 +24,19 @@ app.post("/", (req, res) => {
   };
   todos.push(todo);
   res.status(202).json(todo);
+});
+
+app.get("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const todo = todos.find((todo) => todo.id === id);
+
+  if (!todo) {
+    res.status(404).json({ error: "Todo not Found" });
+  }
+
+  res.status(202).json({
+    todo,
+  });
 });
 
 app.put("/:id", (req, res) => {
